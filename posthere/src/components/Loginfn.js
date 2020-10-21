@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom"
 import { axiosWithAuth } from "../api/axiosWithAuth";
 
-const Login = () =>{
+const Loginfn = () =>{
     const [user,setUser] = useState({
         loginItems:{
             username:"",
@@ -25,7 +25,7 @@ const Login = () =>{
     const login = (e) =>{
         e.preventDefault();
         axiosWithAuth()
-        .post("",user.loginItems)
+        .post("https://posthere-subreddit-app.herokuapp.com/api/auth/login",user.loginItems)
         .then((res) =>{
             console.log(res)
             window.localStorage.setItem("token", res.data.payload)
@@ -61,4 +61,4 @@ const Login = () =>{
     </div>
     )
 }
-export default Login;
+export default Loginfn;

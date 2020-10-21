@@ -7,6 +7,6 @@ export const axiosWithAuth = () =>{
         header:{
             Authorization:token
         },
-        baseURL:""
+        baseURL:"https://posthere-subreddit-app.herokuapp.com/"
     })
 }
