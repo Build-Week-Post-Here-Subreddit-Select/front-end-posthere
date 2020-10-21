@@ -3,7 +3,8 @@ import * as yup from 'yup';
 import axios from 'axios';
 import './style.css'
 import Navigation from './Navigation';
-
+import { axiosWithAuth } from "../api/axiosWithAuth";
+import { useHistory } from "react-router-dom"
 
 export const RegisterForm = () => {
 
@@ -24,6 +25,8 @@ export const RegisterForm = () => {
     })
 
     const [users, setUsers] = useState([])
+
+    const history = useHistory();
 
     const [btnDisabled, setBtnDisabled] = useState('')
 
@@ -84,11 +87,14 @@ export const RegisterForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios
-        .post('https://reqres.in/api/users', formState)
+        axiosWithAuth()
+        .post('https://posthere-subreddit-app.herokuapp.com/api/auth/register', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
+            window.localStorage.setItem("token", res.data.payload)
+            history.push('/login')
             console.log('SUCCESS!', users)
+            console.log(res)
             setFormState({
                 name: '',
                 email: '',
