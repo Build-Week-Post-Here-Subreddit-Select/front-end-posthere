@@ -20,12 +20,12 @@ const PostList = ({ posts, updatePosts }) =>{
     const saveEdit = e =>{
         e.preventDefault();
         axiosWithAuth()
-        .put(`api/posts/${postToEdit.id}`, postToEdit)
+        .put(`https://posthere-subreddit-app.herokuapp.com/api/users/1/posts/${postToEdit.id}`, postToEdit)
         .then((res) =>{
             setEditing(false);
             updatePosts(
-                posts.map(color =>{
-                    return post.id === postToEdit.id ? res.data : color;
+                posts.map(post =>{
+                    return post.id === postToEdit.id ? res.data : post;
                 })
             )
         })
@@ -40,11 +40,11 @@ const PostList = ({ posts, updatePosts }) =>{
 
     const deletePost = post =>{
         axiosWithAuth()
-        .delete(`api/posts${post.id}`)
+        .delete(`https://posthere-subreddit-app.herokuapp.com/api/users/1/posts/1${post.id}`)
         .then((res) =>{
             updatePosts(
                 posts.filter((postItem) =>{
-                    return postItem.id !== color.id;
+                    return postItem.id !== post.id;
                 })
             )
         })
@@ -82,3 +82,5 @@ const PostList = ({ posts, updatePosts }) =>{
         </div>
     )
 }
+
+export default PostList;

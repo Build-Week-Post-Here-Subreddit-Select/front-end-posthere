@@ -3,6 +3,8 @@ import './App.css';
 import Loginfn from "./components/Loginfn"
 import Signupfn from "./components/Signupfn"
 import { BrowserRouter as Router, Route, Switch,Link } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
+import HomePage from './components/HomePage';
 
 function App() {
   return (
@@ -16,8 +18,8 @@ function App() {
         <Switch>
       
     <Route path ="/signup" component={Signupfn}/>
-    <Route component={Loginfn} />
-
+    <Route path = "/login"  component={Loginfn} />
+    <PrivateRoute exact path="homepage" component={HomePage} />
   </Switch>
     </div>
     </Router>

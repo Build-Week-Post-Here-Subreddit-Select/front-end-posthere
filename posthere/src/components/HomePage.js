@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../api/axiosWithAuth";
-
+import PostList from "./PostList"
+import Posts from "./Posts"
 
 const HomePage = () =>{
     const [postHere, setPostHere] = useState ([])
