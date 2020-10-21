@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import './style.css'
+import Navigation from './Navigation';
 
 
-export const Form = () => {
+export const RegisterForm = () => {
 
     const [formState, setFormState] = useState({
         name: '',
         email: '',
+        username: '',
         password: '',
         terms: false,
     })
@@ -15,6 +18,7 @@ export const Form = () => {
     const [errors, setErrors] = useState({
         name: '',
         email: '',
+        username: '',
         password: '',
         terms: '',
     })
@@ -28,6 +32,12 @@ export const Form = () => {
         .string()
         .trim()
         .required('The name is a required field.'),
+        username: yup
+        .string()
+        .trim()
+        .required('The username field is required.')
+        .min(5, 'Username must be at least 8 characters long.')
+        .max(20, 'The username character limit is 20.'),
         password: yup
         .string()
         .trim()
@@ -75,13 +85,14 @@ export const Form = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         axios
-        .post('', formState)
+        .post('https://reqres.in/api/users', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
             console.log('SUCCESS!', users)
             setFormState({
                 name: '',
                 email: '',
+                username: '',
                 password: '',
                 terms: false,
             })
@@ -93,6 +104,7 @@ export const Form = () => {
 
     return (
         <div>
+            <div className='register'>
             <form onSubmit={onSubmit}>
                 <label htmlFor='name'>
                     Name:&nbsp;
@@ -113,6 +125,17 @@ export const Form = () => {
                     id='email'
                     placeholder='Type your email here.'
                     value={formState.email}
+                    onChange={inputChange}
+                    />
+                </label>
+                <label htmlFor='username'>
+                    Username:&nbsp;
+                    <input 
+                    type='username'
+                    name='username'
+                    id='username'
+                    placeholder='Type your username here.'
+                    value={formState.username}
                     onChange={inputChange}
                     />
                 </label>
@@ -142,10 +165,11 @@ export const Form = () => {
                 <div>
                     <p> {errors.name} </p>
                     <p> {errors.email} </p>
+                    <p> {errors.username} </p>
                     <p> {errors.password} </p>
                     <div>
                         <button disabled={btnDisabled} type='submit' data-cy='button'>
-                            Submit User
+                            Register User
                         </button>
                     </div>
                     <div>
@@ -153,8 +177,9 @@ export const Form = () => {
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     )
 }
 
-export default Form;
+export default RegisterForm;
