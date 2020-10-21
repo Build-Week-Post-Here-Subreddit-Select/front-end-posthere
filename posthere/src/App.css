@@ -1,10 +1,10 @@
 
 .App{
   text-align: center;
-  background-image: url("https://external-preview.redd.it/ux4vc46s-gE5Mep-cuvmcLLKl7QmJIyzC0WsZwVyBu4.jpg?auto=webp&s=e510117b122843032f297ce0ae13fde1f121a675");
+  background-image: url("https://i.imgur.com/J22jElL.jpg");
   height: 100vh;
-  filter: blur(3.5px);
-  -webkit-filter: blur(3.5px);
+  /* filter: blur(3.5px); */
+  /* -webkit-filter: blur(3.5px); */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -12,3 +12,16 @@
 }
 
 
+img{
+  filter: blur(3.5px); 
+   -webkit-filter: blur(3.5px);
+}
+.login{
+  display: flex;
+  flex-direction: column;
+}
+.login form{
+  display: flex;
+  flex-direction: column;
+  margin-top: ;
+}

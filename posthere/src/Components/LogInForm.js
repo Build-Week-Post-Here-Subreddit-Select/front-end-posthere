@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import './style.css'
-import Navigation from './Navigation';
+import { axiosWithAuth } from "../api/axiosWithAuth";
+import { useHistory } from "react-router-dom"
+
 
 
 export const LogInForm = () => {
@@ -20,6 +22,8 @@ export const LogInForm = () => {
     const [users, setUsers] = useState([])
 
     const [btnDisabled, setBtnDisabled] = useState('')
+
+    const history = useHistory();
 
     const formSchema = yup.object().shape({
         username: yup
@@ -64,11 +68,13 @@ export const LogInForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios
-        .post('https://reqres.in/api/users', formState)
+        axiosWithAuth
+        .post('https://posthere-subreddit-app.herokuapp.com/api/auth/login', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
             console.log('SUCCESS!', users)
+            window.localStorage.setItem("token", res.data.payload)
+            history.push("/homepage")
             setFormState({
                 username: '',
                 password: '',
@@ -80,7 +86,6 @@ export const LogInForm = () => {
     }
 
     return (
-        <div>
             <div className='login'>
             <form onSubmit={onSubmit}>
                 <label htmlFor='username'>
@@ -119,7 +124,7 @@ export const LogInForm = () => {
                 </div>
             </form>
             </div>
-        </div>
+        
     )
 }
 
