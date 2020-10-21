@@ -29,7 +29,7 @@ const Loginfn = () =>{
         .then((res) =>{
             console.log(res)
             window.localStorage.setItem("token", res.data.payload)
-            history.push("/postpage")
+            history.push("/homepage")
         })
         .catch((err) => console.log(err))
     }

@@ -20,10 +20,11 @@ const HomePage = () =>{
     }
 
     return(
-        <>
+        <div className="posts-wrap">
+            <h1>Post here</h1>
         <PostList posts={postHere} updatePost={setPostHere} />
         <Posts posts={postHere} />
-        </>
+        </div>
     )
 }
 export default HomePage;
