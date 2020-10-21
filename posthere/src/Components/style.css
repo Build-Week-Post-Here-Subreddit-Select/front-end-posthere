@@ -1,0 +1,54 @@
+
+
+/* .background{
+    background-image: url("https://external-preview.redd.it/ux4vc46s-gE5Mep-cuvmcLLKl7QmJIyzC0WsZwVyBu4.jpg?auto=webp&s=e510117b122843032f297ce0ae13fde1f121a675");
+  height: 100vh;
+  filter: blur(3.5px);
+  -webkit-filter: blur(3.5px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+} */
+
+.navbar{
+    /* background-image: url("https://external-preview.redd.it/ux4vc46s-gE5Mep-cuvmcLLKl7QmJIyzC0WsZwVyBu4.jpg?auto=webp&s=e510117b122843032f297ce0ae13fde1f121a675"); */
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.4); 
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 90%;
+    padding: 25px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 70rem;
+    height: 80rem;
+    margin: 20px;
+    margin-top: -40rem;
+}
+
+.login{
+
+}
