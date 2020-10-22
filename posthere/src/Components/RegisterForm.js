@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
-import axios from 'axios';
+
 import './style.css'
-import Navigation from './Navigation';
 import { axiosWithAuth } from "../api/axiosWithAuth";
 import { useHistory } from "react-router-dom"
 
@@ -12,16 +11,14 @@ export const RegisterForm = () => {
         name: '',
         email: '',
         username: '',
-        password: '',
-        terms: false,
+        password: ''
     })
 
     const [errors, setErrors] = useState({
         name: '',
         email: '',
         username: '',
-        password: '',
-        terms: '',
+        password: ''
     })
 
     const [users, setUsers] = useState([])
@@ -75,6 +72,7 @@ export const RegisterForm = () => {
     } 
 
     function inputChange(e) {
+        
         e.persist();
         const newFormData = {
             ...formState,
@@ -87,8 +85,9 @@ export const RegisterForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(formState)
         axiosWithAuth()
-        .post('https://posthere-subreddit-app.herokuapp.com/api/auth/register', formState)
+        .post('/api/auth/register', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
             window.localStorage.setItem("token", res.data.payload)
@@ -99,8 +98,8 @@ export const RegisterForm = () => {
                 name: '',
                 email: '',
                 username: '',
-                password: '',
-                terms: false,
+                password: ''
+               
             })
         })
         .catch(err => {
@@ -157,7 +156,7 @@ export const RegisterForm = () => {
                     />
                 </label>
                 <div>
-                    <label htmlFor='terms'>
+                    {/* <label htmlFor='terms'>
                         <h4> Do you accept the Terms of Service (TOS) </h4>
                         <input 
                         type='checkbox'
@@ -166,7 +165,7 @@ export const RegisterForm = () => {
                         checked={formState.terms}
                         onChange={inputChange}
                         />
-                    </label>
+                    </label> */}
                 </div>
                 <div>
                     <p> {errors.name} </p>

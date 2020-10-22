@@ -1,30 +1,74 @@
-import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "../api/axiosWithAuth";
-import PostList from "./PostList"
-import Posts from "./Posts"
+import React, { useState } from "react";
+
 
 const HomePage = () =>{
-    const [postHere, setPostHere] = useState ([])
+   
+    const [newPost, setNewPost] = useState({
+        postItems:{
+          title:"",
+          body:"",
+        }
+      });
 
-    useEffect(() =>{
-        getData();
-    },[])
-
-    const getData = () =>{
-        axiosWithAuth()
-        .get("/api/posts")
-        .then((res) =>{
-            setPostHere(res.data)
+      const handleChange = (e) =>{
+        setNewPost({
+          loginItems:{
+            ...newPost.postItems,
+            [e.target.name]: e.target.value
+          }
         })
-        .catch((err) => console.log(err))
-    }
-
+      }
     return(
-        <div className="posts-wrap">
-            <h1>Post here</h1>
-        <PostList posts={postHere} updatePost={setPostHere} />
-        <Posts posts={postHere} />
-        </div>
+        <div className= "login-form">
+          <h1>Posts</h1>
+
+      <form >
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          value={newPost.postItems.title}
+          onChange={handleChange}
+          placeholder="Enter Title"
+        />
+        <label>Password:</label>
+        <input
+          placeholder="Enter Password"
+          type="text"
+          name="body"
+          value={newPost.postItems.body}
+          onChange={handleChange}
+
+        />
+        <button type="submit">Log in</button>
+      </form>
+    </div>
     )
 }
 export default HomePage;
+
+// const HomePage = () =>{
+//     const [postHere, setPostHere] = useState ([])
+
+//     useEffect(() =>{
+//         getData();
+//     },[])
+
+//     const getData = () =>{
+//         axiosWithAuth()
+//         .get("")
+//         .then((res) =>{
+//             setPostHere(res.data)
+//         })
+//         .catch((err) => console.log(err))
+//     }
+
+//     return(
+//         <div className="posts-wrap">
+//             <h1>Post here</h1>
+//         <PostList posts={postHere} updatePost={setPostHere} />
+//         <Posts posts={postHere} />
+//         </div>
+//     )
+// }
+// export default HomePage;

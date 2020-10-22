@@ -63,3 +63,48 @@ img{
   margin: 20px;
   
 }
+
+.new-posts{
+  display:flex;
+  justify-content: center;
+  /* background-color: rgba(0, 0, 0, 0.89); */
+  width:30%;
+  margin-left: 35%;
+  height: 15rem;
+  margin-top: 5rem;
+  background-image: url("https://lh3.googleusercontent.com/proxy/1WqsC7UfM9dYtQTLVGl_2TjSQn_NVGVNFMstzQJFPWm3_uMN6Tmcklbiioe71pJaQU6fEXietk7rvA_XGiwxCgLE");
+}
+
+.new-posts form{
+  display:flex;
+  flex-direction: column;
+  width:70%;
+}
+
+input.title {
+  /* border-bottom: 2px solid red; */
+  border-radius: 4px;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.89);
+  color:white;
+}
+
+input.text {
+  border-radius: 4px;
+  float: left;
+  margin-top: 6px;
+  background-color: rgba(0, 0, 0, 0.89);
+  height:4rem;
+  padding-bottom: 2rem;
+  color:white;
+  font-size: 1.2rem;
+  /* padding-bottom: 15rem; */
+}
+button{
+  margin-top: 2rem;
+  margin-bottom:5rem;
+  width:50%;
+  background-color: rgba(0, 0, 0, 0.89);
+  color:lightgray;
+
+}
