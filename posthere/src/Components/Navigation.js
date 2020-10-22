@@ -1,19 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-// import './style.css'
+// import React from 'react'
+// import { Link } from 'react-router-dom'
+// // import './style.css'
 
-const Navigation = () => {
-    return (
-        <div className='navbar'>
-            <Link to='/'>Home Page</Link> <br/>
-            <img src='https://i.imgur.com/cCJnjJR.png' alt='logo'/>
-            <br/>
-            <div>
-            <Link to='/register'>Register</Link><br/>
-            <Link to='/login'>Login</Link>
-            </div>
-        </div>
-    )
-}
+// const Navigation = () => {
+//     return (
+//         <div className='navbar'>
+//             <img src='https://i.imgur.com/cCJnjJR.png' alt='logo'/>
+//             <br/>
+//             <div>
+//             <Link to='/signup'>Register</Link><br/>
+//             <Link to='/login'>HI</Link>
+//             </div>
+//         </div>
+//     )
+// }
 
-export default Navigation
+// export default Navigation

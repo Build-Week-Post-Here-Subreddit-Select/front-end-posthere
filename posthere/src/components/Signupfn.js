@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from "./node_modules/react";
 import { axiosWithAuth } from "../api/axiosWithAuth";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "/node_modules/react-router-dom"
 
 const Signupfn = () =>{
     const [newUser, setNewUser] = useState({
