@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { axiosWithAuth } from "../api/axiosWithAuth";
 import { useHistory } from "react-router-dom"
+import Navigation from '../Components/Navigation';
 
 
 
@@ -86,6 +87,7 @@ export const LogInForm = () => {
 
     return (
             <div className='login'>
+                {/* <Navigation/> */}
             <form onSubmit={onSubmit}>
                 <label htmlFor='username'>
                     Username:&nbsp;
@@ -116,9 +118,6 @@ export const LogInForm = () => {
                         <button disabled={btnDisabled} type='submit' data-cy='button'>
                             Log in
                         </button>
-                    </div>
-                    <div>
-                        <pre> {JSON.stringify(users)} </pre>
                     </div>
                 </div>
             </form>
