@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../api/axiosWithAuth";
+import { useHistory } from "react-router-dom"
 
 const Signupfn = () =>{
     const [newUser, setNewUser] = useState({
@@ -7,9 +8,13 @@ const Signupfn = () =>{
             username:"",
             password:"",
             email:"",
-            name:"",
+            name:""
          }
     })
+
+    const history = useHistory();
+
+
     const handleChange = (e) =>{
         setNewUser({
             signUpItems:{
@@ -22,13 +27,13 @@ const Signupfn = () =>{
     const signUp = (e) =>{
         e.preventDefault();
         axiosWithAuth()
-        .post("https://posthere-subreddit-app.herokuapp.com/api/auth/register",newUser.signUpItems)
+        .post("api/auth/register",newUser.signUpItems)
         .then((res) =>{
             console.log(res)
             window.localStorage.setItem("token", res.data.payload)
-            // history.push("/postpage")
+            history.push("/login")
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log({err: err.message}))
     }
 
     return(

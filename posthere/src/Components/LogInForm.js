@@ -68,7 +68,7 @@ export const LogInForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axiosWithAuth
+        axiosWithAuth()
         .post('https://posthere-subreddit-app.herokuapp.com/api/auth/login', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
