@@ -1,31 +1,34 @@
 import React from 'react';
 import './App.css';
-import Loginfn from "./components/Loginfn"
-import Signupfn from "./components/Signupfn"
+import Loginfn from "./Components/Loginfn"
 import { BrowserRouter as Router, Route, Switch,Link } from "react-router-dom";
-import PrivateRoute from './components/PrivateRoute';
-// import HomePage from './components/HomePage';
-// import Navigation from './components/Navigation';
-// import LogInForm from './components/LogInForm';
-import RegisterForm from './components/RegisterForm';
-// import Home from './components/Home';
-import PostList from "./components/PostList"
+import PrivateRoute from './Components/PrivateRoute';
+
+import RegisterForm from './Components/RegisterForm';
+import PostList from "./Components/PostList"
+import LogInForm from "./Components/Loginfn"
+
+
 function App() {
   return (
   <Router>
     <div className="App">
       <div className = "nav">
       <Route exact path = "/" component={Loginfn} />
+      
       <Link to = "login">Login</Link>
+      
+      <img src='https://i.imgur.com/cCJnjJR.png' alt='logo'/>
+
       <Link to = "signup">Sign Up</Link>
+      
+
       </div>
         <Switch>
       
-    {/* <Route path ="/signup" component={Signupfn}/> */}
     <Route path='/signup' render={() => <RegisterForm/>}/>
 
-    <Route path = "/login"  component={Loginfn} />
-    {/* <Route path='/login' render={() => <LogInForm/>}/>  */}
+    <Route path='/login' render={() => <LogInForm/>}/> 
 
     <PrivateRoute exact path="/postlist" component={PostList} />
   </Switch>

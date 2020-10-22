@@ -177,9 +177,6 @@ export const RegisterForm = () => {
                             Register User
                         </button>
                     </div>
-                    <div>
-                        <pre> {JSON.stringify(users)} </pre>
-                    </div>
                 </div>
             </form>
             </div>

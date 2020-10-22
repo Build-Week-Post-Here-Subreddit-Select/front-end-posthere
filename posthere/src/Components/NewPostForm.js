@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 
 import {axiosWithAuth} from '../api/axiosWithAuth'
-import axios from "react"
 
 const NewPostForm = () => {
     
@@ -12,7 +11,7 @@ const NewPostForm = () => {
     })
 
      const handleFormChange = e => {
-        console.log()
+        console.log("something changed")
         setInput({
                 ...input,
                 [e.target.name]: e.target.value
@@ -22,10 +21,10 @@ const NewPostForm = () => {
  
     
 
-    const postFriend = e => {
+    const newPost = e => {
         e.preventDefault();
         axiosWithAuth()
-            .post('posts/', input)
+            .post('https://posthere-subreddit-app.herokuapp.com/api/users/1/posts/', input)
             .then(addedPost=> {
                 console.log(addedPost)
             })
@@ -46,7 +45,7 @@ const NewPostForm = () => {
     }
  return(
         <div className='new-posts'>
-            <form onSubmit={(e) => postFriend(e)}>
+            <form onSubmit={(e) => newPost(e)}>
                 <label>Title:&nbsp;</label>
                 <input className="title"
                     name='post_title'

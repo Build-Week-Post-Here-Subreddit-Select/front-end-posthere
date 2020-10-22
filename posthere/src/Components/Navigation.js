@@ -5,12 +5,11 @@
 // const Navigation = () => {
 //     return (
 //         <div className='navbar'>
-//             <Link to='/'>Home Page</Link> <br/>
 //             <img src='https://i.imgur.com/cCJnjJR.png' alt='logo'/>
 //             <br/>
 //             <div>
-//             <Link to='/register'>Register</Link><br/>
-//             <Link to='/login'>Login</Link>
+//             <Link to='/signup'>Register</Link><br/>
+//             <Link to='/login'>HI</Link>
 //             </div>
 //         </div>
 //     )

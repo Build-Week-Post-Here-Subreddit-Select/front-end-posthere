@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import * as yup from 'yup';
-import axios from 'axios';
+import React, { useState, useEffect } from './node_modules/react';
+import * as yup from './node_modules/yup';
+import axios from './node_modules/axios';
 import { axiosWithAuth } from "../api/axiosWithAuth";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "./node_modules/react-router-dom"
+import Navigation from './Navigation';
 
 
 
@@ -116,9 +117,6 @@ export const LogInForm = () => {
                         <button disabled={btnDisabled} type='submit' data-cy='button'>
                             Log in
                         </button>
-                    </div>
-                    <div>
-                        <pre> {JSON.stringify(users)} </pre>
                     </div>
                 </div>
             </form>

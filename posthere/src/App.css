@@ -12,22 +12,8 @@
 }
 
 
-img{
-  filter: blur(3.5px); 
-   -webkit-filter: blur(3.5px);
-}
-.login{
-  display: flex;
-  flex-direction: column;
-}
-.login form{
-  display: flex;
-  flex-direction: column;
-  margin-top: ;
-}
-
-.navbar{
-  /* background-image: url("https://external-preview.redd.it/ux4vc46s-gE5Mep-cuvmcLLKl7QmJIyzC0WsZwVyBu4.jpg?auto=webp&s=e510117b122843032f297ce0ae13fde1f121a675"); */
+.nav{
+  
   background-color: rgb(0,0,0); 
   background-color: rgba(0,0,0, 0.4); 
   font-weight: bold;
@@ -46,32 +32,37 @@ img{
   font-size: 25px;
 }
 
-.navbar a{
-  color: white;
-  text-decoration: none;
-}
 
 
 .register{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 70rem;
-  height: 80rem;
-  margin: 20px;
-  
 }
 
+.register form {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  height: 20rem;
+  margin: 20px;
+  margin-top: 12rem;
+  margin-left: 46rem;
+  background-color:grey;
+
+}
+
+.register form label{
+  margin-top: 1rem;
+}
+
+
 .new-posts{
-  display:flex;
-  justify-content: center;
-  /* background-color: rgba(0, 0, 0, 0.89); */
+  /* display:flex;
+  justify-content: center; */
   width:30%;
-  margin-left: 35%;
+  margin-left: 40%;
   height: 15rem;
-  margin-top: 5rem;
+  padding-top: 15rem;
   background-image: url("https://lh3.googleusercontent.com/proxy/1WqsC7UfM9dYtQTLVGl_2TjSQn_NVGVNFMstzQJFPWm3_uMN6Tmcklbiioe71pJaQU6fEXietk7rvA_XGiwxCgLE");
 }
 
@@ -82,7 +73,6 @@ img{
 }
 
 input.title {
-  /* border-bottom: 2px solid red; */
   border-radius: 4px;
   font-size: 2rem;
   background-color: rgba(0, 0, 0, 0.89);
@@ -106,5 +96,18 @@ button{
   width:50%;
   background-color: rgba(0, 0, 0, 0.89);
   color:lightgray;
+}
+.login{
+  display: flex;
+  flex-direction: column;
 
+
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  width:50%;
+  margin-left: 25%;
+  padding-top: 15rem;
 }
