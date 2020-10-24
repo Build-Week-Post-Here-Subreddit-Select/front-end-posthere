@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from './node_modules/react';
-import * as yup from './node_modules/yup';
-import axios from './node_modules/axios';
+import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
 import { axiosWithAuth } from "../api/axiosWithAuth";
-import { useHistory } from "./node_modules/react-router-dom"
-import Navigation from './Navigation';
+import { useHistory } from "react-router-dom"
+import { connect } from "react-redux"
+import { login } from '../actions/loginActions'
 
-
-
-export const LogInForm = () => {
+export const LogInForm = ({user, login,isFetching,error}) => {
 
     const [formState, setFormState] = useState({
         username: '',
@@ -38,12 +36,25 @@ export const LogInForm = () => {
         .max(20, 'The password character limit is 20.'),
     });
 
+    // useEffect(() => {
+    //     if(user){
+    //         const {}
+    //     }
+    //     console.log('The form has changed.');
+    //     formSchema.isValid(formState).then((valid) => {
+    //         setBtnDisabled(!valid);
+    //     });
+    // }, [formState]);
     useEffect(() => {
-        console.log('The form has changed.');
-        formSchema.isValid(formState).then((valid) => {
-            setBtnDisabled(!valid);
-        });
-    }, [formState]);
+        if (user) {
+           const { username, password } = user
+           setFormState({
+              username: username,
+              password: password
+           })
+        }
+     }, [user])
+  
 
     function validateChange(e) {
         yup.reach(formSchema, e.target.name).validate(e.target.value)
@@ -55,66 +66,79 @@ export const LogInForm = () => {
         });
     } 
 
-    function inputChange(e) {
-        e.persist();
-        const newFormData = {
-            ...formState,
-            [e.target.name]: 
-            e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-        }
-        validateChange(e);
-        setFormState(newFormData);
-    }
+    // function inputChange(e) {
+    //     e.persist();
+    //     const newFormData = {
+    //         ...formState,
+    //         [e.target.name]: 
+    //         e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+    //     }
+    //     validateChange(e);
+    //     setFormState(newFormData);
+    // }
+    const handleChange = e => {
+        setFormState({ ...formState, [e.target.name]: e.target.value })
+     }
+  
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        axiosWithAuth()
-        .post('https://posthere-subreddit-app.herokuapp.com/api/auth/login', formState)
-        .then(res => {
-            setUsers({ ...setUsers, [users]: res.data })
-            console.log('SUCCESS!', users)
-            window.localStorage.setItem("token", res.data.payload)
-            history.push("/homepage")
-            setFormState({
-                username: '',
-                password: '',
-            })
-        })
-        .catch(err => {
-            console.log(err.response);
-        })
-    }
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
+    //     axiosWithAuth()
+    //     .post('https://posthere-subreddit-app.herokuapp.com/api/auth/login', formState)
+    //     .then(res => {
+    //         setUsers({ ...setUsers, [users]: res.data })
+    //         console.log('SUCCESS!', res)
+    //         window.localStorage.setItem("token", res.data.payload)
+    //         window.localStorage.setItem("id", res.data.user_id)
+    //         history.push("/postlist")
+    //         setFormState({
+    //             username: '',
+    //             password: '',
+    //         })
+    //     })
+    //     .catch(err => {
+    //         console.log(err.response);
+    //     })
+    // }
+    const handleSubmit = e => {
+        e.preventDefault()
+        login(formState)
+        setTimeout(() => {
+           history.push(`/postlist`)
+        }, 1000)
+     }
 
     return (
             <div className='login'>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit}>
+                <h1>Login</h1>
                 <label htmlFor='username'>
-                    Username:&nbsp;
+                   
                     <input 
                     type='text'
                     name='username'
                     id='username'
                     placeholder='Type your username here.'
                     value={formState.name}
-                    onChange={inputChange}
+                    onChange={handleChange}
                     />
                 </label>
                 <label htmlFor='password'>
-                    Password:&nbsp;
+                    
                     <input 
                     type='password'
                     name='password'
                     id='password'
                     placeholder='Type your password here.'
                     value={formState.password}
-                    onChange={inputChange}
+                    onChange={handleChange}
                     />
                 </label>
                 <div>
                     <p> {errors.name} </p>
                     <p> {errors.password} </p>
                     <div>
-                        <button disabled={btnDisabled} type='submit' data-cy='button'>
+                        <button disabled={btnDisabled} type='submit' >
                             Log in
                         </button>
                     </div>
@@ -124,5 +148,11 @@ export const LogInForm = () => {
         
     )
 }
-
-export default LogInForm;
+const mapStateToProps = state => (
+    {
+       user: state.loginReducer.user,
+       isFetching: state.loginReducer.isFetching,
+       error: state.loginReducer.error
+    }
+ )
+export default connect(mapStateToProps, { login })(LogInForm);

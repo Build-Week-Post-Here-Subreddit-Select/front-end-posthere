@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import Loginfn from "./Components/Loginfn"
 import { BrowserRouter as Router, Route, Switch,Link } from "react-router-dom";
 import PrivateRoute from './Components/PrivateRoute';
 
 import RegisterForm from './Components/RegisterForm';
 import PostList from "./Components/PostList"
-import LogInForm from "./Components/Loginfn"
+import LogInForm from "./Components/LogInForm"
 
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
   <Router>
     <div className="App">
       <div className = "nav">
-      <Route exact path = "/" component={Loginfn} />
+      <Route exact path = "/" component={LogInForm} />
       
       <Link to = "login">Login</Link>
       

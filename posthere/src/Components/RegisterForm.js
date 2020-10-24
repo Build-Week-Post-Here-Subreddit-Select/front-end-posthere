@@ -87,7 +87,7 @@ export const RegisterForm = () => {
         e.preventDefault();
         console.log(formState)
         axiosWithAuth()
-        .post('/api/auth/register', formState)
+        .post('/auth/register', formState)
         .then(res => {
             setUsers({ ...setUsers, [users]: res.data })
             window.localStorage.setItem("token", res.data.payload)
@@ -110,47 +110,49 @@ export const RegisterForm = () => {
     return (
         <div>
             <div className='register'>
+                
             <form onSubmit={onSubmit}>
+            <h1>Registration</h1>
                 <label htmlFor='name'>
-                    Name:&nbsp;
+                    
                     <input 
                     type='text'
                     name='name'
                     id='name'
-                    placeholder='Type your name here.'
+                    placeholder='Name'
                     value={formState.name}
                     onChange={inputChange}
                     />
                 </label>
                 <label htmlFor='email'>
-                    Email:&nbsp;
+                    
                     <input 
                     type='email'
                     name='email'
                     id='email'
-                    placeholder='Type your email here.'
+                    placeholder='Email'
                     value={formState.email}
                     onChange={inputChange}
                     />
                 </label>
                 <label htmlFor='username'>
-                    Username:&nbsp;
+                   
                     <input 
                     type='username'
                     name='username'
                     id='username'
-                    placeholder='Type your username here.'
+                    placeholder='Create UserName'
                     value={formState.username}
                     onChange={inputChange}
                     />
                 </label>
                 <label htmlFor='password'>
-                    Password:&nbsp;
+                    
                     <input 
                     type='password'
                     name='password'
                     id='password'
-                    placeholder='Type your password here.'
+                    placeholder='Create Password'
                     value={formState.password}
                     onChange={inputChange}
                     />

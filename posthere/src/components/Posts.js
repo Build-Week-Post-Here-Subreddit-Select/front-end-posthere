@@ -1,94 +1,66 @@
-import React, { useState } from "react";
-import { axiosWithAuth } from "../api/axiosWithAuth";
+import React, { useState,useEffect } from "react";
+import { connect } from 'react-redux'
 
 
+import { useParams, useHistory } from 'react-router-dom'
+import { toggleEdit, setPostToEdit } from "../actions/editActions";
+import { deletePost,getPosts } from "../actions/CRUD";
 
-const Posts = (props) => {
-  const [editToggle, setEditToggle] = useState(false);
-  
-  const [editPostInfo, setEditPostInfo] = useState({
-    name: props.post.name,
-    age: props.post.age,
-    email: props.post.email,
-  });
 
-  const deletePost = (e) => {
-    axiosWithAuth()
-      .delete(`https://posthere-subreddit-app.herokuapp.com/api/users/1/posts/1${props.post.id}`)
-      .then((res) => {
-        props.setList(res.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+const Posts = ({ post,toogleEdit,setPostToEdit,deletePost }) => {
+  const { post_title, post_text, dated } = post
+  const id = useParams().id
+  const history = useHistory()
 
-  const editChange = (e) => {
-    e.preventDefault();
-    setEditPostInfo({
-      ...editPostInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const editFriend = (e) => {
-    e.preventDefault();
-    setEditToggle(true);
-  };
-  const submitEdit = (e) => {
-    axiosWithAuth()
-      .put(`https://posthere-subreddit-app.herokuapp.com/api/users/1/posts/${props.post.id}`, editPostInfo)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-  const cancelEdit = (e) => {
-    setEditToggle(false);
-  };
+  useEffect(() => {
+    getPosts(id)
+ }, [])
+
+  const editThePost = e =>{
+    toogleEdit(true)
+    setPostToEdit(post)
+    history('/postlist')
+  }
+  const deleteThePost = e =>{
+    deletePost(post)
+    history.push('/postlist')
+  }
+  const cancelEdit = e => {
+    e.preventDefault()
+    history.push('/posts')
+    window.location.reload()
+ }
+ const handleBack = e => {
+  history.push('/postslist');
+}
+
+
   return (
       
-    <section >
-      {editToggle ? (
-        <div className="posts-section">
-          <form>
-            <label> Name:&nbsp;</label>
-            <input
-              type="text"
-              name="name"
-              value={editPostInfo.name}
-              onChange={editChange}
-            />
-            <label> Age:&nbsp;</label>
-            <input
-              type="text"
-              name="age"
-              value={editPostInfo.age}
-              onChange={editChange}
-            />
-            <label>Email:&nbsp;</label>
-            <input
-              type="text"
-              name="email"
-              value={editPostInfo.email}
-              onChange={editChange}
-            />
-            <button onClick={cancelEdit}>Cancel Edit</button>
-            <button onClick={submitEdit}>Submit</button>
-          </form>
-        </div>
-      ) : (
-        <div className="new-added-posts">
-          <p> Name:&nbsp;{props.post.name}</p>
-          <p> Age:&nbsp;{props.post.age}</p>
-          <p> Email:&nbsp;{props.post.email}</p>
-          <button onClick={deletePost}>Delete</button>
-          <button onClick={editFriend}>Edit</button>
-        </div>
-      )}
-    </section>
+   
+         <div className='post-and-back'>
+            <img className='back-btn'  alt='Go Back' onClick={handleBack} />
+            <div className='post-div'>
+              
+               <h1 className='post-h1'>Suggested Subreddit: </h1>
+               <div className='post-top-div'>
+                  <h3 className='post-h3'>{dated}</h3>
+                  <div className='post-btn-div'>
+                     <img className='post-btn update-btn' alt='Edit' onClick={editThePost} />
+                     <img className='post-btn delete-btn'  alt='Delete' onClick={deleteThePost} />
+                  </div>
+               </div>
+               <div className='post-div1'><h3 >{post_title}</h3></div>
+               <div className='post-div2'><h4 >{post_text}</h4></div>
+            </div>
+         </div>
+      
   );
 };
+const mapStateToProps = state => (
+  {
+     post: state.crudReducer.post
+  }
+)
 
-export default Posts; 
+export default connect(mapStateToProps, {  toggleEdit,setPostToEdit, deletePost })(Posts); 

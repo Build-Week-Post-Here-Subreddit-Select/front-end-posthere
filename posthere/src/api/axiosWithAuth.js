@@ -4,9 +4,9 @@ export const axiosWithAuth = () =>{
     const token = localStorage.getItem("token")
 
     return axios.create({
-        header:{
-            Authorization:token
+        headers:{
+            authorization:`Bearer ${token}`
         },
-        baseURL:"https://posthere-subreddit-app.herokuapp.com/"
+        baseURL:"https://posthere-subreddit-app.herokuapp.com/api"
     })
 }

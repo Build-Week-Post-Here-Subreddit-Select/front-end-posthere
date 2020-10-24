@@ -7,18 +7,8 @@ const PostList = ({refresh, setRefresh}) => {
   const [list, setList] = useState([]);
   const [post, setPost] = useState({ post_title: "", post_text: ""});
 
-  useEffect(() => {
-    getList();
-  }, []);
+  
 
-  const getList = () => {
-    axiosWithAuth()
-      .get("/posts")
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log({err: err.message}));
-  };
 
   const handleChanges = (e) => {
     setPost({
@@ -26,9 +16,9 @@ const PostList = ({refresh, setRefresh}) => {
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = (e) => {
+  const onSubmit = (user_id) => {
     axiosWithAuth()
-      .post("/posts", post)
+      .post(`https://posthere-subreddit-app.herokuapp.com/api/users/${user_id}/posts`, post)
       .then((res) => {
         console.log(res);
       })
